@@ -8,6 +8,7 @@
 #include<iterator>
 #include<eigen3/Eigen/Core>
 #include<algorithm>
+#include <ros/ros.h>
 
 using namespace std;
 
@@ -48,5 +49,7 @@ double  Conversion(const string & str );
     判断两个STRING对象是否相等
 */
 bool is_separator(const string& separator , const string & single);
+
+void Pubpose(ros::Publisher &pose_pub);
 
 #endif  

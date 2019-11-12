@@ -454,6 +454,19 @@ roscpp_generate_messages_py/fast:
 .PHONY : roscpp_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named PosePuber_node
+
+# Build rule for target.
+PosePuber_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PosePuber_node
+.PHONY : PosePuber_node
+
+# fast build rule for target.
+PosePuber_node/fast:
+	$(MAKE) -f occupany_mapping/CMakeFiles/PosePuber_node.dir/build.make occupany_mapping/CMakeFiles/PosePuber_node.dir/build
+.PHONY : PosePuber_node/fast
+
+#=============================================================================
 # Target rules for targets named nav_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -480,6 +493,19 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_py
+
+# Build rule for target.
+nav_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_py
+.PHONY : nav_msgs_generate_messages_py
+
+# fast build rule for target.
+nav_msgs_generate_messages_py/fast:
+	$(MAKE) -f occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+.PHONY : nav_msgs_generate_messages_py/fast
+
+#=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -504,19 +530,6 @@ rosgraph_msgs_generate_messages_eus: cmake_check_build_system
 rosgraph_msgs_generate_messages_eus/fast:
 	$(MAKE) -f occupany_mapping/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make occupany_mapping/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_py
-
-# Build rule for target.
-nav_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_py
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	$(MAKE) -f occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
 
 #=============================================================================
 # Target rules for targets named nav_msgs_generate_messages_cpp
@@ -595,6 +608,19 @@ actionlib_msgs_generate_messages_py: cmake_check_build_system
 actionlib_msgs_generate_messages_py/fast:
 	$(MAKE) -f occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named LaserPuber_node
+
+# Build rule for target.
+LaserPuber_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LaserPuber_node
+.PHONY : LaserPuber_node
+
+# fast build rule for target.
+LaserPuber_node/fast:
+	$(MAKE) -f occupany_mapping/CMakeFiles/LaserPuber_node.dir/build.make occupany_mapping/CMakeFiles/LaserPuber_node.dir/build
+.PHONY : LaserPuber_node/fast
 
 #=============================================================================
 # Target rules for targets named _catkin_empty_exported_target
@@ -722,17 +748,19 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_py"
+	@echo "... PosePuber_node"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... nav_msgs_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... LaserPuber_node"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_eus"

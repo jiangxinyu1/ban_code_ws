@@ -80,6 +80,16 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -101,16 +111,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # Special rule for the target install
 install: preinstall
@@ -363,6 +363,21 @@ roscpp_generate_messages_py/fast:
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
+occupany_mapping/CMakeFiles/PosePuber_node.dir/rule:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/PosePuber_node.dir/rule
+.PHONY : occupany_mapping/CMakeFiles/PosePuber_node.dir/rule
+
+# Convenience name for target.
+PosePuber_node: occupany_mapping/CMakeFiles/PosePuber_node.dir/rule
+
+.PHONY : PosePuber_node
+
+# fast build rule for target.
+PosePuber_node/fast:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/PosePuber_node.dir/build.make occupany_mapping/CMakeFiles/PosePuber_node.dir/build
+.PHONY : PosePuber_node/fast
+
+# Convenience name for target.
 occupany_mapping/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
 	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
 .PHONY : occupany_mapping/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
@@ -393,6 +408,21 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+.PHONY : occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_py: occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+
+.PHONY : nav_msgs_generate_messages_py
+
+# fast build rule for target.
+nav_msgs_generate_messages_py/fast:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+.PHONY : nav_msgs_generate_messages_py/fast
+
+# Convenience name for target.
 occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
 	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
 .PHONY : occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
@@ -421,21 +451,6 @@ rosgraph_msgs_generate_messages_eus: occupany_mapping/CMakeFiles/rosgraph_msgs_g
 rosgraph_msgs_generate_messages_eus/fast:
 	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make occupany_mapping/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
-	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-.PHONY : occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nav_msgs_generate_messages_py: occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
-
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 occupany_mapping/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
@@ -526,6 +541,21 @@ actionlib_msgs_generate_messages_py: occupany_mapping/CMakeFiles/actionlib_msgs_
 actionlib_msgs_generate_messages_py/fast:
 	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make occupany_mapping/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+occupany_mapping/CMakeFiles/LaserPuber_node.dir/rule:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f CMakeFiles/Makefile2 occupany_mapping/CMakeFiles/LaserPuber_node.dir/rule
+.PHONY : occupany_mapping/CMakeFiles/LaserPuber_node.dir/rule
+
+# Convenience name for target.
+LaserPuber_node: occupany_mapping/CMakeFiles/LaserPuber_node.dir/rule
+
+.PHONY : LaserPuber_node
+
+# fast build rule for target.
+LaserPuber_node/fast:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/LaserPuber_node.dir/build.make occupany_mapping/CMakeFiles/LaserPuber_node.dir/build
+.PHONY : LaserPuber_node/fast
 
 # Convenience name for target.
 occupany_mapping/CMakeFiles/_catkin_empty_exported_target.dir/rule:
@@ -632,6 +662,60 @@ roscpp_generate_messages_cpp/fast:
 	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make occupany_mapping/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
+src/LaserPuber_node.o: src/LaserPuber_node.cpp.o
+
+.PHONY : src/LaserPuber_node.o
+
+# target to build an object file
+src/LaserPuber_node.cpp.o:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/LaserPuber_node.dir/build.make occupany_mapping/CMakeFiles/LaserPuber_node.dir/src/LaserPuber_node.cpp.o
+.PHONY : src/LaserPuber_node.cpp.o
+
+src/LaserPuber_node.i: src/LaserPuber_node.cpp.i
+
+.PHONY : src/LaserPuber_node.i
+
+# target to preprocess a source file
+src/LaserPuber_node.cpp.i:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/LaserPuber_node.dir/build.make occupany_mapping/CMakeFiles/LaserPuber_node.dir/src/LaserPuber_node.cpp.i
+.PHONY : src/LaserPuber_node.cpp.i
+
+src/LaserPuber_node.s: src/LaserPuber_node.cpp.s
+
+.PHONY : src/LaserPuber_node.s
+
+# target to generate assembly for a file
+src/LaserPuber_node.cpp.s:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/LaserPuber_node.dir/build.make occupany_mapping/CMakeFiles/LaserPuber_node.dir/src/LaserPuber_node.cpp.s
+.PHONY : src/LaserPuber_node.cpp.s
+
+src/PosePuber_node.o: src/PosePuber_node.cpp.o
+
+.PHONY : src/PosePuber_node.o
+
+# target to build an object file
+src/PosePuber_node.cpp.o:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/PosePuber_node.dir/build.make occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o
+.PHONY : src/PosePuber_node.cpp.o
+
+src/PosePuber_node.i: src/PosePuber_node.cpp.i
+
+.PHONY : src/PosePuber_node.i
+
+# target to preprocess a source file
+src/PosePuber_node.cpp.i:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/PosePuber_node.dir/build.make occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.i
+.PHONY : src/PosePuber_node.cpp.i
+
+src/PosePuber_node.s: src/PosePuber_node.cpp.s
+
+.PHONY : src/PosePuber_node.s
+
+# target to generate assembly for a file
+src/PosePuber_node.cpp.s:
+	cd /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build && $(MAKE) -f occupany_mapping/CMakeFiles/PosePuber_node.dir/build.make occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.s
+.PHONY : src/PosePuber_node.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -640,6 +724,7 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... list_install_components"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_py"
@@ -655,19 +740,20 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_py"
-	@echo "... list_install_components"
+	@echo "... PosePuber_node"
 	@echo "... nav_msgs_generate_messages_eus"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... install"
+	@echo "... nav_msgs_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... nav_msgs_generate_messages_py"
-	@echo "... install"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... LaserPuber_node"
 	@echo "... _catkin_empty_exported_target"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... geometry_msgs_generate_messages_eus"
@@ -676,6 +762,12 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... rebuild_cache"
+	@echo "... src/LaserPuber_node.o"
+	@echo "... src/LaserPuber_node.i"
+	@echo "... src/LaserPuber_node.s"
+	@echo "... src/PosePuber_node.o"
+	@echo "... src/PosePuber_node.i"
+	@echo "... src/PosePuber_node.s"
 .PHONY : help
 
 

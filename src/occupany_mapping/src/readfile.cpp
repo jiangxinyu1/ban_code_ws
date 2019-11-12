@@ -1,10 +1,13 @@
+#include <ros/ros.h>
+#include <sstream>
 #include "readfile.h"
 
 typedef string::size_type  string_size;
 const string const_separator = ",";
-const string path_pose  = "occupany_amapping/data/pose.txt";
-const string path_laser_angle = "occupany_amapping/data/scanAngles.txt";
-const string path_laser_range = "occupany_amapping/data/ranges.txt";
+const string base_path = "/home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/data/";
+const string path_pose  = base_path + "pose.txt";
+const string path_laser_angle = base_path + "scanAngles.txt";
+const string path_laser_range = base_path + "ranges.txt";
 
 //判断是否为标识符
 bool is_separator(const string &separator, const string &single)
@@ -124,3 +127,17 @@ void ReadPoseInformation (vector<Eigen::Vector3d> &pose_vec , const string &path
         pose_vec.push_back(POSE);
     }
 }
+
+/*
+     发布位姿信息的函数 
+*/
+// void Pubpose(ros::Publisher & pose_pub)
+// {
+//     vector<Eigen::Vector3d> Pose_Vec;
+//     ReadPoseInformation(Pose_Vec, path_pose);
+//     // vector<Eigen::Vector3d>::iterator iter = Pose_Vec.begin();
+//     for (int i = 0 ; i < Pose_Vec.size(); ++i)
+//     {
+//         pose_pub.publish(Pose_Vec[i]);
+//     }
+// }
