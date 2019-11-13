@@ -128,16 +128,3 @@ void ReadPoseInformation (vector<Eigen::Vector3d> &pose_vec , const string &path
     }
 }
 
-/*
-     发布位姿信息的函数 
-*/
-// void Pubpose(ros::Publisher & pose_pub)
-// {
-//     vector<Eigen::Vector3d> Pose_Vec;
-//     ReadPoseInformation(Pose_Vec, path_pose);
-//     // vector<Eigen::Vector3d>::iterator iter = Pose_Vec.begin();
-//     for (int i = 0 ; i < Pose_Vec.size(); ++i)
-//     {
-//         pose_pub.publish(Pose_Vec[i]);
-//     }
-// }

@@ -9,6 +9,8 @@
 #include<eigen3/Eigen/Core>
 #include<algorithm>
 #include <ros/ros.h>
+#include "geometry_msgs/Quaternion.h"
+#include "geometry_msgs/Pose.h"
 
 using namespace std;
 
@@ -50,6 +52,5 @@ double  Conversion(const string & str );
 */
 bool is_separator(const string& separator , const string & single);
 
-void Pubpose(ros::Publisher &pose_pub);
 
 #endif  

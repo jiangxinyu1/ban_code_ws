@@ -4,6 +4,9 @@
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/include/occupany_mapping/readfile.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/src/PosePuber_node.cpp
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/src/readfile.cpp
+occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
+occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Pose.h
+occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Quaternion.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/assert.h
@@ -22,6 +25,7 @@ occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ro
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/message.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/message_event.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/message_forward.h
+occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/message_operations.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/message_traits.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/names.h
 occupany_mapping/CMakeFiles/PosePuber_node.dir/src/PosePuber_node.cpp.o: /opt/ros/melodic/include/ros/node_handle.h
