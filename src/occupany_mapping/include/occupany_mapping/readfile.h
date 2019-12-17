@@ -1,56 +1,39 @@
-#ifndef  READFILE_H
+#ifndef READFILE_H
 #define READFILE_H
 
-#include<iostream>
-#include <fstream>
-#include<vector>
-#include<string>
-#include<iterator>
-#include<eigen3/Eigen/Core>
-#include<algorithm>
-#include <ros/ros.h>
-#include "geometry_msgs/Quaternion.h"
-#include "geometry_msgs/Pose.h"
-
-using namespace std;
-
-// 读取的最大的数据数目 
-const int READ_MAX_NUMBER = 100;
+#include <vector>
+#include <eigen3/Eigen/Core>
+#include <iostream>
 
 
-/*  
-    定义存储laser数据的结构体
-*/
-typedef struct {
-    vector<double> angles_vec;
-    vector<double> ranges_vec; 
-}LaserScanVec;
+//max 3000
+#define READ_DATA_NUMBER  50
 
 /* 
-    从对象is读取激光雷达数据，存到laserscan_vec里面
+    结构体变量GeneralLaserScan
+    有两个vector<double>类型成员变量
+    分别存储激光雷达的角度值和距离值
 */
-void ReadLaserInformation(LaserScanVec &laserscan, const string &angle_path, const string &range_path);
-    /*  
-    从对象is读取位姿信息，存储到pose_vec里
-*/
-void ReadPoseInformation(vector<Eigen::Vector3d> &pose_vec, const string &path);
+typedef struct general_laser_scan
+{
+    std::vector<double> range_readings;
+    std::vector<double> angle_readings;
+}GeneralLaserScan;
 
-    /*
-    把string对象通过分隔符打散成多个string对象
-    存储在vector里面，返回指针
-*/
-    vector<string> SeparateStr(const string &line, const string &separator);
 
+/*
+    读取位姿信息的函数
+    @param 1 : 文件位置
+    @param 2 : 存储'Eigen::Vector3d'的 vector reference
+*/
+void ReadPoseInformation(const std::string path,std::vector<Eigen::Vector3d>& poses);
 /*  
-    把string对象转换成double对象的函数
+    读取激光雷达数据的函数
+    @param 1 : 文件位置
+    @param 2 : 存储GeneralLaserScan的 vector reference
 */
-double  Conversion(const string & str );
+void ReadLaserScanInformation(const std::string anglePath,
+                              const std::string laserPath,
+                              std::vector< GeneralLaserScan >& laserscans);
 
-/*  
-    判断string是否是separator
-    判断两个STRING对象是否相等
-*/
-bool is_separator(const string& separator , const string & single);
-
-
-#endif  
+#endif

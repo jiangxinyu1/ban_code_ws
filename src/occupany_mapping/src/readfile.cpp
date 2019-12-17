@@ -1,130 +1,193 @@
-#include <ros/ros.h>
-#include <sstream>
 #include "readfile.h"
+#include <fstream>
+#include <boost/algorithm/string.hpp>
 
-typedef string::size_type  string_size;
-const string const_separator = ",";
-const string base_path = "/home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/data/";
-const string path_pose  = base_path + "pose.txt";
-const string path_laser_angle = base_path + "scanAngles.txt";
-const string path_laser_range = base_path + "ranges.txt";
 
-//判断是否为标识符
-bool is_separator(const string &separator, const string &single)
+double NormalizationAngle(double angle)
 {
-    if (separator.size() != single.size())
-    {
-        cerr << " The separator is wrong ! " << endl;
-        return false;
-    }
-    for (int index = 0; index < separator.size(); ++index)
-    {
-        if (separator[index] != single[index])
-        {
-            return false;
-        }
-    }
-    return true;
+    if(angle > 3.1415926)
+        angle -= 2* 3.1415926;
+    else if(angle < -3.1415926)
+        angle += 2 * 3.1415926;
+
+    return angle;
 }
 
-//分离string对象
-vector<string> SeparateStr( const string &line, const string &separator)
+template <class Type>
+Type stringToNum(const std::string& str)
 {
-    vector<string> string_vec;
-    int front = 0;
-    int elem_num = 1;
-    string_size i = front;
-    while( i < line.size() )
+    std::istringstream iss(str);
+    Type num;
+    iss >> num;
+
+    return num;
+}
+
+typedef std::string::size_type string_size;
+std::vector<std::string> splitString(const std::string &s, const std::string &seperator)
+{
+    std::vector<std::string> result;
+    string_size i = 0;
+
+    while(i != s.size())
     {
-        for ( i = front ; i < line.size(); ++i)
+        //找到字符串中首个不等于分隔符的字母；
+        int flag = 0;
+        while(i != s.size() && flag == 0)
         {
-            string tmp = line.substr(i, 1);
-            
-            if (is_separator(separator, tmp))
+            flag = 1;
+            for(string_size k = 0; k < seperator.size(); k++)
             {
-                //find the first separator
-                elem_num = i - front;
-                //copy(front,elem_num)
-                string str_1 = line.substr(front, elem_num);
-                string_vec.push_back(str_1);
-                front = i + 1;
+                if(s[i] == seperator[k])
+                {
+                    i++;
+                    flag = 0;
+                    break;
+                }
             }
         }
+
+        //找到又一个分隔符，将两个分隔符之间的字符串取出；
+        flag = 0;
+        string_size j = i;
+        while(j != s.size() && flag == 0)
+        {
+            for(string_size k = 0; k < seperator.size(); k++)
+            {
+                if(s[j] == seperator[k])
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0)
+                j++;
+        }
+
+        if(i != j)
+        {
+            result.push_back(s.substr(i, j-i));
+            i = j;
+        }
     }
-    string str_2 = line.substr(front);
-    string_vec.push_back(str_2);
-    return string_vec;
+    return result;
 }
 
-// 把string对象转化为double
-double  Conversion(const string &str)
-{
-    double  value;
-    stringstream ss (str);
-    ss >> value; 
-    return value;
-}
 
-// 读取激光雷达数据
-void ReadLaserInformation( LaserScanVec &laserscan  , const string &angle_path ,const string  &range_path)
+
+//读取机器人的位姿信息．
+void ReadPoseInformation(const std::string path,std::vector<Eigen::Vector3d>& poses)
 {
-    // 读取角度信息
-    string line;
-    ifstream is_angle(angle_path.c_str());
-    if(is_angle.is_open()==false)
+    std::ifstream fin(path.c_str());
+    if(fin.is_open() == false)
     {
-        cerr << "The angle data file open failed !!!" << endl;
+        std::cout <<"Read File Failed!!!"<<std::endl;
         return ;
     }
-    while(getline(is_angle,line))
+
+    int cnt = 0;
+
+    std::string line;
+    while(std::getline(fin,line))
     {
-        vector<string> angle = SeparateStr(line,const_separator);
-        vector<string>::iterator iter = angle.begin();
-        for( ; iter!=angle.end();++iter)
-        {
-            double angle_ = Conversion(*iter);
-            laserscan.angles_vec.push_back(angle_);
-        }
+        cnt++;
+        std::vector<std::string> results;
+
+        results = splitString(line,",");
+
+        double x = stringToNum<double>(results[0]);
+        double y = -stringToNum<double>(results[1]);
+        double theta = stringToNum<double>(results[2]);
+
+        theta = -NormalizationAngle(theta);
+
+        Eigen::Vector3d pose(x,y,theta);
+
+        poses.push_back(pose);
+
+        if(cnt >= READ_DATA_NUMBER)
+            break;
+
     }
-    cout << "Complete reading  the angle data. " << endl;
-    // 读取距离信息
-    ifstream is_range(range_path.c_str());
-    if (is_range.is_open() == false)
-    {
-        cerr << "The range data file open failed !!!" << endl;
-        return;
-    }
-    while (getline(is_range, line))
-    {
-        vector<string> range = SeparateStr(line, const_separator);
-        vector<string>::iterator iter = range.begin();
-        for (; iter != range.end(); ++iter)
-        {
-            double range_ = Conversion(*iter);
-            laserscan.ranges_vec.push_back(range_);
-        }
-    }
-    cout << "Complete reading  the angle data. " << endl;
+    fin.close();
+
+    std::cout <<"Read Pose Good!!!"<<std::endl;
 }
 
 
-// 读取位姿信息
-void ReadPoseInformation (vector<Eigen::Vector3d> &pose_vec , const string &path)
+void ReadLaserScanInformation(const std::string anglePath,
+                              const std::string laserPath,
+                              std::vector< GeneralLaserScan >& laserscans)
 {
-    string line;
-    ifstream is (path.c_str());
-    if( is.is_open() == false )
+    //////////////////////////////////////////读取角度信息///////////////////////////////////////////////
+    std::ifstream fin(anglePath.c_str());
+    if(fin.is_open() == false)
     {
-        cerr << "Open the data file failed !!!" << endl;
+        std::cout <<"Read Angle File Failed!!!"<<std::endl;
+        return ;
     }
-    while( getline(is , line) )
+
+    GeneralLaserScan tmpGeneralLaserScan;
+
+    //读取角度信息
+    int cnt = 0;
+    std::string line;
+    std::getline(fin,line);
+    std::vector<std::string> results;
+    results = splitString(line,",");
+    for(int i = 0; i < results.size();i++)
     {
-        vector<string> pose = SeparateStr(line,const_separator);
-        double x = Conversion(pose[0]);
-        double y = Conversion(pose[1]);
-        double theta = Conversion(pose[2]);
-        Eigen::Vector3d POSE (x,y,theta);
-        pose_vec.push_back(POSE);
+        double anglei = -stringToNum<double>(results[i]);
+        tmpGeneralLaserScan.angle_readings.push_back(anglei);
     }
+    fin.close();
+
+    std::cout <<"Read Angle good:"<<tmpGeneralLaserScan.angle_readings.size()<<std::endl;
+
+    //////////////////////////////////////////读取激光信息///////////////////////////////////////////////
+
+    fin.open(laserPath.c_str());
+    if(fin.is_open() == false)
+    {
+        std::cout <<"Read Scan File Failed!!!"<<std::endl;
+        return ;
+    }
+
+    laserscans.clear();
+
+    int xx;
+    while(std::getline(fin,line))
+    {
+        //读取一行，每一行进行分割
+        std::vector<std::string> results;
+        results = splitString(line,",");
+
+        cnt++;
+        xx = results.size();
+
+        tmpGeneralLaserScan.range_readings.clear();
+        for(int i = 0; i < results.size();i++)
+        {
+            double rangei = stringToNum<double>(results[i]);
+            tmpGeneralLaserScan.range_readings.push_back(rangei);
+        }
+
+        laserscans.push_back(tmpGeneralLaserScan);
+
+        if(cnt >= READ_DATA_NUMBER)
+            break;
+    }
+
+    std::cout <<"XX:"<<xx<<std::endl;
+
+    fin.close();
+
+    std::cout <<"Read Laser Scans Good!!!!"<<std::endl;
 }
+
+
+
+
+
+
 

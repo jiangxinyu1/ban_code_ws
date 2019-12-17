@@ -5,4 +5,4 @@ Description: Description of occupany_mapping
 Version: 0.0.0
 Cflags: 
 Libs: -L/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel/lib 
-Requires: nav_msgs roscpp rospy std_msgs
+Requires: roscpp rospy std_msgs
