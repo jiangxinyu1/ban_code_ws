@@ -7,7 +7,7 @@
 
 
 //max 3000
-#define READ_DATA_NUMBER  50
+#define READ_DATA_NUMBER  300
 
 /* 
     结构体变量GeneralLaserScan
@@ -27,6 +27,7 @@ typedef struct general_laser_scan
     @param 2 : 存储'Eigen::Vector3d'的 vector reference
 */
 void ReadPoseInformation(const std::string path,std::vector<Eigen::Vector3d>& poses);
+
 /*  
     读取激光雷达数据的函数
     @param 1 : 文件位置

@@ -1,6 +1,7 @@
 #include "readfile.h"
 #include <fstream>
 #include <boost/algorithm/string.hpp>
+#include <iostream>
 
 
 double NormalizationAngle(double angle)

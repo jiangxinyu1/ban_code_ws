@@ -83,12 +83,12 @@ std::vector<GridIndex> TraceLine(int x0, int y0, int x1, int y1)
 */
 void SetMapParams(void )
 {
-  //  宽度900
+  //  宽度90
    mapParams.width = 900;
-  //  高度900
+  //  高度90
    mapParams.height = 900;
   //  分辨率 0.04
-   mapParams.resolution = 0.4;
+   mapParams.resolution = 0.04;
 
    //每次被集中的log变化值
    mapParams.log_free = -1;
@@ -158,6 +158,7 @@ void OccupanyMapping(std::vector<GeneralLaserScan>& scans,std::vector<Eigen::Vec
 {
     //遍历每一帧的激光雷达数据
     for(int i = 0; i < scans.size();i++)
+
     {
         //  定义一个scan存储每一帧激光雷达的数据
         GeneralLaserScan scan = scans[i];
@@ -182,12 +183,10 @@ void OccupanyMapping(std::vector<GeneralLaserScan>& scans,std::vector<Eigen::Vec
             // 把激光点在雷达坐标系下的世界坐标转换到世界坐标系下
             double world_x = cos(theta) * laser_x - sin(theta) * laser_y + robotPose(0);
             double world_y = sin(theta) * laser_x + cos(theta) * laser_y + robotPose(1);
-            // 设置地图参数
-            SetMapParams();
             // 把激光点转换到栅格坐标下 
             GridIndex Index =  ConvertWorld2GridIndex(world_x,world_y);
-            // 如果Index的值合法 ,就利用画线算法把当前帧当前角度的激光经过的栅格坐标求出来
-            if( ! isValidGridIndex(Index))
+            // 利用画线算法把当前帧当前角度的激光经过的栅格坐标求出来
+            if (isValidGridIndex(Index) == 1)
             {
                 std::vector<GridIndex> Index_v = TraceLine(robotIndex.x, robotIndex.y, Index.x, Index.y);
                 // 更新未被击中的栅格值
@@ -196,11 +195,10 @@ void OccupanyMapping(std::vector<GeneralLaserScan>& scans,std::vector<Eigen::Vec
                   int n = (Index_v[m].x - 1) * mapParams.width + Index_v[m].y;
                   pMap[n] = pMap[n] + mapParams.log_free - 50;
                 }
+                // 更新击中的栅格
+                int x = (Index.x - 1) * mapParams.width + Index.y;
+                pMap[x] = pMap[x] + mapParams.log_occ - 50;
             }
-            // 更新击中的栅格
-            int x = (robotIndex.x - 1) * mapParams.width +robotIndex.y ; 
-            pMap[x] = pMap[x] +  mapParams.log_occ - 50;
-
         }
     }
 }
@@ -237,8 +235,8 @@ void PublishMap(ros::Publisher& map_pub)
        }
        else
        {
-
-           rosMap.data[i] = pMap[i];
+          // std::cout << pMap[i] << std::endl; 
+          rosMap.data[i] = pMap[i];
        }
     }
 
@@ -275,15 +273,17 @@ int main(int argc, char** argv)
 
     //设置地图信息
     SetMapParams();
+    std::cout << "complete the SetMapParams()" << std::endl;
 
     OccupanyMapping(generalLaserScans,robotPoses);
+    std::cout << "complete the OccupanyMapping()" << std::endl;
 
     PublishMap(mapPub);
+    std::cout << "Start  the PublishMap(mapPub);" << std::endl;
 
     ros::spin();
+    std::cout << "complete the ros::spin();" << std::endl;
 
     DestoryMap();
-
     std::cout <<"Release Memory!!"<<std::endl;
-
 }
