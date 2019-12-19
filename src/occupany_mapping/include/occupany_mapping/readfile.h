@@ -7,7 +7,7 @@
 
 
 //max 3000
-#define READ_DATA_NUMBER  300
+#define READ_DATA_NUMBER  10000
 
 /* 
     结构体变量GeneralLaserScan

@@ -106,11 +106,15 @@ void SetMapParams(void )
    mapParams.offset_y = 600;
 
   //  申请一块地图大小的动态内存,存储栅格的数组
-   pMap = new unsigned char[mapParams.width*mapParams.height];
+   pMap = new double[mapParams.width*mapParams.height];
 
    // 遍历数组,把每一个栅格的初始值设置为50;
    for(int i = 0; i < mapParams.width * mapParams.height;i++)
-        pMap[i] = 50;
+   {
+     pMap[i] = 50.00;
+   }
+   std::cout << "Complete set the pMap" << std::endl;
+        
 }
 
 
@@ -125,6 +129,9 @@ GridIndex ConvertWorld2GridIndex(double x,double y)
     return index;
 }
 
+/*  
+  把Index转化成pMap数组里的值
+*/
 int GridIndexToLinearIndex(GridIndex index)
 {
     int linear_index;
@@ -158,47 +165,61 @@ void OccupanyMapping(std::vector<GeneralLaserScan>& scans,std::vector<Eigen::Vec
 {
     //遍历每一帧的激光雷达数据
     for(int i = 0; i < scans.size();i++)
-
     {
-        //  定义一个scan存储每一帧激光雷达的数据
-        GeneralLaserScan scan = scans[i];
-        // 定义一个robotPose存储每一帧机器人的位姿
-        Eigen::Vector3d robotPose = robot_poses[i];
+      // std::cout << " pMap[20] = " << pMap[20] << std::endl;
+      //  定义一个scan存储每一帧激光雷达的数据
+      GeneralLaserScan scan = scans[i];
+      // 定义一个robotPose存储每一帧机器人的位姿
+      Eigen::Vector3d robotPose = robot_poses[i];
 
-        //把机器人的位姿从世界坐标转换到栅格地图坐标
-        GridIndex robotIndex = ConvertWorld2GridIndex(robotPose(0),robotPose(1));
+      //把机器人的位姿从世界坐标转换到栅格地图坐标
+      GridIndex robotIndex = ConvertWorld2GridIndex(robotPose(0), robotPose(1));
 
-        // 遍历当前帧中的每一激光束
-        for(int id = 0; id < scan.range_readings.size();id++)
+      // 遍历当前帧中的每一激光束
+      for (int id = 0; id < scan.range_readings.size(); id++)
+      {
+        double dist = scan.range_readings[id];
+        // 激光雷达逆时针转，角度取反
+        double angle = -scan.angle_readings[id];
+        // 如果距离值是无限大或者非数字,这个距离值跳过
+        if (std::isinf(dist) || std::isnan(dist))
+          continue;
+        // 由距离值和角度值计算激光点在雷达坐标系下的世界坐标
+        double theta = -robotPose(2);
+        double laser_x = dist * cos(angle);
+        double laser_y = dist * sin(angle);
+        // 把激光点在雷达坐标系下的世界坐标转换到世界坐标系下
+        double world_x = cos(theta) * laser_x - sin(theta) * laser_y + robotPose(0);
+        double world_y = sin(theta) * laser_x + cos(theta) * laser_y + robotPose(1);
+        // 把激光点转换到栅格坐标下
+        GridIndex Index = ConvertWorld2GridIndex(world_x, world_y);
+        // 利用画线算法把当前帧当前角度的激光经过的栅格坐标求出来
+        if (isValidGridIndex(Index) == 1)
         {
-            double dist = scan.range_readings[id];
-            // 激光雷达逆时针转，角度取反
-            double angle = -scan.angle_readings[id];
-            // 如果距离值是无限大或者非数字,这个距离值跳过
-            if(std::isinf(dist) || std::isnan(dist))    continue;
-            // 由距离值和角度值计算激光点在雷达坐标系下的世界坐标
-            double theta = -robotPose(2); 
-            double laser_x = dist * cos(angle);
-            double laser_y = dist * sin(angle);
-            // 把激光点在雷达坐标系下的世界坐标转换到世界坐标系下
-            double world_x = cos(theta) * laser_x - sin(theta) * laser_y + robotPose(0);
-            double world_y = sin(theta) * laser_x + cos(theta) * laser_y + robotPose(1);
-            // 把激光点转换到栅格坐标下 
-            GridIndex Index =  ConvertWorld2GridIndex(world_x,world_y);
-            // 利用画线算法把当前帧当前角度的激光经过的栅格坐标求出来
-            if (isValidGridIndex(Index) == 1)
+          std::vector<GridIndex> Index_v = TraceLine(robotIndex.x, robotIndex.y, Index.x, Index.y);
+          // 更新未被击中的栅格值
+          int n = 0;
+          for (int m = 0; m < Index_v.size(); m++)
+          {
+            n = GridIndexToLinearIndex(Index_v[m]);
+            pMap[n] = pMap[n] + mapParams.log_free - 1.00;
+            if (pMap[n] < 0.00)
             {
-                std::vector<GridIndex> Index_v = TraceLine(robotIndex.x, robotIndex.y, Index.x, Index.y);
-                // 更新未被击中的栅格值
-                for (int m = 0; m < Index_v.size(); m++)
-                {
-                  int n = (Index_v[m].x - 1) * mapParams.width + Index_v[m].y;
-                  pMap[n] = pMap[n] + mapParams.log_free - 50;
-                }
-                // 更新击中的栅格
-                int x = (Index.x - 1) * mapParams.width + Index.y;
-                pMap[x] = pMap[x] + mapParams.log_occ - 50;
+              pMap[n] = mapParams.log_min;
             }
+          }
+          // 更新击中的栅格
+          int x = GridIndexToLinearIndex(Index);
+          pMap[x] = pMap[x] + mapParams.log_occ -1.00 ;
+          if (pMap[x] > mapParams.log_max)
+          {
+            pMap[x] = mapParams.log_max;
+          }
+          if (pMap[x] < mapParams.log_min)
+          {
+            pMap[x] = mapParams.log_min;
+          }
+        }
         }
     }
 }
@@ -235,8 +256,7 @@ void PublishMap(ros::Publisher& map_pub)
        }
        else
        {
-          // std::cout << pMap[i] << std::endl; 
-          rosMap.data[i] = pMap[i];
+         rosMap.data[i] = pMap[i];
        }
     }
 

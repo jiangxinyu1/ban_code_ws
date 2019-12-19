@@ -45,7 +45,7 @@ typedef struct map_params
 
 MapParams mapParams;
 
-unsigned char * pMap;
+double * pMap;
   
 
 #endif
