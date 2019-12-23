@@ -8,9 +8,16 @@
             "includePath": [
                 "/opt/ros/melodic/include",
                 "/usr/include",
+                "/usr/include/pcl-1.8",
+                "/usr/include/eigen3",
+                "/usr/include/vtk-6.3",
+                "/usr/local/include",
+                "/home/banban/lib",
                 "${workspaceFolder}/**",
                 "include",
-                "include/occupany_mapping"
+                "include/occupany_mapping",
+                "include/imlsMatcher",
+                "/usr/include/vtk-6.3"
             ],
             "name": "Linux",
             "intelliSenseMode": "gcc-x64",

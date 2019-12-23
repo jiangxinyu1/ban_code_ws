@@ -1,2 +1,2 @@
-occupany_mapping
+champion_nav_msgs/src/champion_nav_msgs:imlsMatcher:occupany_mapping
 -DCATKIN_DEVEL_PREFIX=/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel -DCMAKE_INSTALL_PREFIX=/home/banban/workspace/jiangxinyu_ws/ban_code_ws/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel
+
+Name: imlsMatcher
+Description: Description of imlsMatcher
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel/lib 
+Requires: 

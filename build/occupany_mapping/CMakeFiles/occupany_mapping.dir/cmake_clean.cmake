@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/occupany_mapping.dir/src/occupany_mapping.cpp.o"
   "CMakeFiles/occupany_mapping.dir/src/readfile.cpp.o"
-  "/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel/lib/occupany_mapping/occupany_mapping.pdb"
-  "/home/banban/workspace/jiangxinyu_ws/ban_code_ws/devel/lib/occupany_mapping/occupany_mapping"
+  "../devel/lib/occupany_mapping/occupany_mapping.pdb"
+  "../devel/lib/occupany_mapping/occupany_mapping"
 )
 
 # Per-language clean rules from dependency scanning.

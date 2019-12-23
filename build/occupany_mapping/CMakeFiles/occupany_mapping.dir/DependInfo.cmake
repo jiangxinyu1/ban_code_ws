@@ -22,6 +22,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/banban/workspace/jiangxinyu_ws/ban_code_ws/src/occupany_mapping/include/occupany_mapping"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/eigen3"
   )
 
 # Targets to which this target links.

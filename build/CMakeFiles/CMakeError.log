@@ -1,22 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_5ebe5/fast"
-/usr/bin/make -f CMakeFiles/cmTC_5ebe5.dir/build.make CMakeFiles/cmTC_5ebe5.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_4affe/fast"
 make[1]: 进入目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
-Building C object CMakeFiles/cmTC_5ebe5.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_5ebe5.dir/CheckSymbolExists.c.o   -c /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_5ebe5
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5ebe5.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_5ebe5.dir/CheckSymbolExists.c.o  -o cmTC_5ebe5 
-CMakeFiles/cmTC_5ebe5.dir/CheckSymbolExists.c.o：在函数‘main’中：
+/usr/bin/make -f CMakeFiles/cmTC_4affe.dir/build.make CMakeFiles/cmTC_4affe.dir/build
+make[2]: 进入目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_4affe.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_4affe.dir/CheckSymbolExists.c.o   -c /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_4affe
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4affe.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_4affe.dir/CheckSymbolExists.c.o  -o cmTC_4affe 
+CMakeFiles/cmTC_4affe.dir/CheckSymbolExists.c.o：在函数‘main’中：
 CheckSymbolExists.c:(.text+0x1b)：对‘pthread_create’未定义的引用
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_5ebe5.dir/build.make:97: recipe for target 'cmTC_5ebe5' failed
-make[1]: *** [cmTC_5ebe5] Error 1
+CMakeFiles/cmTC_4affe.dir/build.make:97: recipe for target 'cmTC_4affe' failed
+make[2]: *** [cmTC_4affe] Error 1
+make[2]: 离开目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
+Makefile:126: recipe for target 'cmTC_4affe/fast' failed
+make[1]: *** [cmTC_4affe/fast] Error 2
 make[1]: 离开目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
-Makefile:126: recipe for target 'cmTC_5ebe5/fast' failed
-make: *** [cmTC_5ebe5/fast] Error 2
 
 File /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +38,22 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_e24f8/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e24f8.dir/build.make CMakeFiles/cmTC_e24f8.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c103a/fast"
 make[1]: 进入目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
-Building C object CMakeFiles/cmTC_e24f8.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e24f8.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_e24f8
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e24f8.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e24f8.dir/CheckFunctionExists.c.o  -o cmTC_e24f8 -lpthreads 
+/usr/bin/make -f CMakeFiles/cmTC_c103a.dir/build.make CMakeFiles/cmTC_c103a.dir/build
+make[2]: 进入目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_c103a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_c103a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c103a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c103a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_c103a.dir/CheckFunctionExists.c.o  -o cmTC_c103a -lpthreads 
 /usr/bin/ld: 找不到 -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e24f8.dir/build.make:97: recipe for target 'cmTC_e24f8' failed
-make[1]: *** [cmTC_e24f8] Error 1
+CMakeFiles/cmTC_c103a.dir/build.make:97: recipe for target 'cmTC_c103a' failed
+make[2]: *** [cmTC_c103a] Error 1
+make[2]: 离开目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
+Makefile:126: recipe for target 'cmTC_c103a/fast' failed
+make[1]: *** [cmTC_c103a/fast] Error 2
 make[1]: 离开目录“/home/banban/workspace/jiangxinyu_ws/ban_code_ws/build/CMakeFiles/CMakeTmp”
-Makefile:126: recipe for target 'cmTC_e24f8/fast' failed
-make: *** [cmTC_e24f8/fast] Error 2
 
 
