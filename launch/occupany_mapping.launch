@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node name = "occupany_mapping" pkg="occupany_mapping" type="occupany_mapping"/>
+    <node name = "rviz" pkg= "rviz" type="rviz"/>
+</launch>
