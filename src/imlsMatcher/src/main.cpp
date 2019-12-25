@@ -8,7 +8,7 @@
 #include "visualization_msgs/MarkerArray.h"
 #include "champion_nav_msgs/ChampionNavLaserScan.h"
 
-#include "pcl-1.8/pcl/io/pcd_io.h"
+#include "pcl-1.8/pcl/io/pcd_io.h" 
 
 //pcl::visualization::CloudViewer g_cloudViewer("cloud_viewer");
 

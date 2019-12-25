@@ -408,7 +408,6 @@ bool IMLSICPMatcher::SolveMotionEstimationProblem(std::vector<Eigen::Vector2d> &
         }
     }
 
-
     //进行多项式的求解，得到对应的lambda．
     double lambda;
     if(SolverFourthOrderPolynomial(poly_coffi,lambda) == false)
